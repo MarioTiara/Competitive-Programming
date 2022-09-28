@@ -1,16 +1,11 @@
 #include <iostream>
 #include<string>
 #include <algorithm> 
+
 using namespace std;
 
 //https://leetcode.com/problems/minimum-number-of-moves-to-make-palindrome/
-int minMovesPalindrome(string s){
-    
 
-
-
-    return 0;
-};
 
 bool isPalindrome(string s){
     string reversed;
@@ -32,9 +27,44 @@ int getMiddleString(string s){
     return midd;
 };
 
+int minMovesPalindrome(string s){
+    int minMove=0;
+    if (isPalindrome(s)){
+        return 0;
+    }
+    int mid=getMiddleString(s);
+    int i=0,j=s.length()-1;
+    while(i<=mid && j>=mid){
+        if (s[i]==s[j]){
+            i++;
+            j--;
+        }else{
+            char RightChar=s[j];
+            for (int r=mid; r>=0;r--){
+                if (s[r]==RightChar){
+                    swap(s[i],s[r]);
+                    break;
+                }
+            }
+            minMove++;
+            i++;
+            j--;
+        }
+    }
+    return 1;
+};
+
+// void swap(int *a, int *b){
+//     int* temp=a;
+//     a=b;
+//     b=temp;
+// }
+
+
+
 int main(){
-    string s= "aaaaa";
-    cout<<getMiddleString(s);
+    string s= "abcddcba";
+    cout<<minMovesPalindrome(s)<<endl;
     return 0;   
 }
 
