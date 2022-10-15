@@ -26,7 +26,12 @@ int getMiddleString(string s){
 
     return midd;
 };
-
+void Swap(char *x, char*y){
+    char temp;
+    temp=*x;
+    *x=*y;
+    *y=temp;
+};
 int minMovesPalindrome(string s){
     int minMove=0;
     if (isPalindrome(s)){
@@ -42,28 +47,24 @@ int minMovesPalindrome(string s){
             char RightChar=s[j];
             for (int r=mid; r>=0;r--){
                 if (s[r]==RightChar){
-                    swap(s[i],s[r]);
+                    Swap(&s[r],&s[i]);
                     break;
                 }
             }
             minMove++;
             i++;
             j--;
+            cout<<s<<endl;
         }
     }
-    return 1;
+    return minMove;
 };
 
-// void swap(int *a, int *b){
-//     int* temp=a;
-//     a=b;
-//     b=temp;
-// }
 
 
 
 int main(){
-    string s= "abcddcba";
+    string s= "letelt";
     cout<<minMovesPalindrome(s)<<endl;
     return 0;   
 }
